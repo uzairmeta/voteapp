@@ -774,8 +774,13 @@
         // })
         //   .then((res) => res.json())
         //   .then(function (data) {
+            let res = localStorage.getItem("voted") || ""
+            let msg ="Vote Successfull"
+            if(res =="true"){
+           msg='Already Voted'
+            }
             $("#result").removeAttr("disabled");
-            $("#msg").html(`${'voted'}`);
+            $("#msg").html(`${msg}`);
             $("#msg").delay(400).fadeOut("slow");
             localStorage.setItem("voted", "true");
         //   });
@@ -788,13 +793,87 @@
       });
     </script>
     <script>
+
+
+async function handlegetallvotes (){
+    const vote = await fetch("http://localhost:8080/vote");
+    const res = await vote.json();
+    console.log(res)
+    
+}
+
+
+
+
+
+        let votes = 100
       $("#result").click(function () {
+        handlegetallvotes()
         $(".append").html('<div class="dot-pulse my-5"></div>');
         // fetch(``)
         //   .then((res) => res.json())
         //   .then(function (data) {
-            $(".append").html(`${"ok"}`);
-        //   });
+            $(".append").html(`${`<div class="box-result d-toggle" style="display: block;">
+<div class="options px-4">
+<div class="append"><div class="child-sub">
+            <div class="flex items-center">
+                <div class="flex-grow flex items-center text-lg sm:text-base custom-input-text">
+                    <span>श्रीमती लेखनी सोनू चंद्राकर</span>
+                </div>
+                <div class="whitespace-nowrap ml-4 text-gray-500 custom-text">
+                    <span>(${votes} votes)</span>
+                </div>
+            </div>
+            <div class="progress">
+                    
+                <div class="progress-bar bg-info" role="progressbar" style="width: 55.16%;" aria-valuenow=" 55.16 " aria-valuemin="0" aria-valuemax="100"> 55.16 %</div>
+            </div>
+            </div><div class="child-sub">
+            <div class="flex items-center">
+                <div class="flex-grow flex items-center text-lg sm:text-base custom-input-text">
+                    <span>श्रीमती खुशबू वैष्णव</span>
+                </div>
+                <div class="whitespace-nowrap ml-4 text-gray-500 custom-text">
+                    <span>(${votes} votes)</span>
+                </div>
+            </div>
+            <div class="progress">
+                    
+                <div class="progress-bar bg-info" role="progressbar" style="width: 0.66%;" aria-valuenow=" 0.66 " aria-valuemin="0" aria-valuemax="100"> 0.66 %</div>
+            </div>
+            </div><div class="child-sub">
+            <div class="flex items-center">
+                <div class="flex-grow flex items-center text-lg sm:text-base custom-input-text">
+                    <span>थानेश्वर साहू</span>
+                </div>
+                <div class="whitespace-nowrap ml-4 text-gray-500 custom-text">
+                    <span>(${votes} votes)</span>
+                </div>
+            </div>
+            <div class="progress">
+                    
+                <div class="progress-bar bg-info" role="progressbar" style="width: 1.01%;" aria-valuenow=" 1.01 " aria-valuemin="0" aria-valuemax="100"> 1.01 %</div>
+            </div>
+            </div><div class="child-sub">
+            <div class="flex items-center">
+                <div class="flex-grow flex items-center text-lg sm:text-base custom-input-text">
+                    <span>सागर सिंह बैस</span>
+                </div>
+                <div class="whitespace-nowrap ml-4 text-gray-500 custom-text">
+                    <span>(${votes} votes)</span>
+                </div>
+            </div>
+            <div class="progress">
+                    
+                <div class="progress-bar bg-info" role="progressbar" style="width: 43.16%;" aria-valuenow=" 43.16 " aria-valuemin="0" aria-valuemax="100"> 43.16 %</div>
+            </div>
+            </div><div class="py-2"><p class="">Total: <span>400</span></p></div></div>
+<div class="vote-button py-2">
+    </div>  
+    </div>
+    </div>`}`);
+    
+
       });
     </script>
     <script>
